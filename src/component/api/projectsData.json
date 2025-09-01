@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "public/Screenshot 2025-09-01 113345.png",
+    "previewLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": 2,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work2.jpg",
+    "previewLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": 3,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work3.jpg",
+    "previewLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": 4,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work4.jpg",
+    "previewLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": 5,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work5.jpg",
+    "previewLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": 6,
+    "title": "Frontend Project",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work6.jpg",
+    "previewLink": "#",
+    "githubLink": "#"
+  }
+]
