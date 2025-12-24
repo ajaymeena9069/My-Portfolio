@@ -1,6 +1,36 @@
+/* eslint-disable no-undef */
 import React from "react";
-
+import emailjs from "emailjs-com";
 export default function Contact() {
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          e.target.reset();
+        },
+        (error) => {
+          console.error(error);
+          alert("Failed to send message. Try again!");
+        }
+      );
+  };
+
+  console.log(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  );
+
   return (
     <section id="contact" className="contact">
       <div className="contact-container container">
@@ -8,7 +38,8 @@ export default function Contact() {
           Contact <span>Me!</span>
         </h2>
 
-        <form action="#">
+        {/* 🔴 ONLY CHANGE: onSubmit added */}
+        <form onSubmit={sendEmail}>
           {/* Row 1 */}
           <div className="input-box">
             <div className="input-field">
@@ -39,7 +70,7 @@ export default function Contact() {
                 type="tel"
                 name="mobile"
                 placeholder="Mobile Number"
-                pattern="[0-9]{10}" /* ✅ 10 digit validation */
+                pattern="[0-9]{10}"
                 required
               />
               <span className="focus"></span>

@@ -127,7 +127,7 @@ header {
   align-items: center;
   height: auto;
   width: 100%;
-  padding: 24px 24px;
+  padding: 20px 24px;
   margin: o auto;
 }
 
@@ -225,7 +225,7 @@ header {
 
   & .text-animate {
   position: relative;
-  width: 34.8rem;
+  width: 39.7rem;
   h3 {
     position: relative;
     font-size: 3.2rem;
@@ -416,6 +416,9 @@ span {
   & img {
     padding: 10px;
     width: 90%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
     border: .2rem solid var(--main-color);
     border-radius: 50%;
   }
@@ -444,9 +447,14 @@ span {
   }
 
   & p {
-    font-size: 1.6rem;
-    margin: 2rem 0 3rem;
-  }
+  font-size: 1.6rem;
+  line-height: 1.6;       
+  margin: 2rem 0 2.5rem;
+  font-weight: 400;       
+  letter-spacing: 0.2px; 
+  word-spacing: 1px;     
+}
+
 }
 
 .btn-box.btns {
@@ -1055,7 +1063,7 @@ span {
   0%,
   10%,
   100% {
-    background-position: -34.8rem 0;
+    background-position: -39.7rem 0;
   }
 
   65%,

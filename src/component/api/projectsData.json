@@ -1,21 +1,22 @@
 [
   {
     "id": 1,
-    "title": "Frontend Project",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
-    "tech": "HTML5, CSS3, JavaScript",
+    "title": "GreenCart",
+    "description": "An e-commerce food store built with React, CSS, and libraries for a smooth and responsive shopping experience.",
+    "tech": "React, CSS3, JavaScript, Libraries",
     "image": "public/Screenshot 2025-09-01 113345.png",
     "previewLink": "#",
-    "githubLink": "#"
+    "githubLink": "https://github.com/ajaymeena9069/GreenCart"
   },
+
   {
     "id": 2,
     "title": "Frontend Project",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo provident aspernatur.",
-    "tech": "HTML5, CSS3, JavaScript",
-    "image": "refrence/Start Project Responsive 3D Personal Portfolio Website/Start Project Responsive 3D Personal Portfolio Website/images/work2.jpg",
-    "previewLink": "#",
-    "githubLink": "#"
+    "description": "Built with React and CSS, featuring API integration, React Router DOM, and a modern responsive design.",
+    "tech": "React, CSS3, API Integration, React Router DOM",
+    "image": "public/ChatGPT Image Sep 1, 2025, 09_04_16 PM.png",
+    "previewLink": "https://ajay-project-country-details.netlify.app/",
+    "githubLink": "https://github.com/ajaymeena9069/Project-Country-Details"
   },
   {
     "id": 3,

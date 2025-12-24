@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaTwitter } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import Tilt from "react-parallax-tilt";
@@ -11,7 +11,7 @@ export default function Home() {
         <div className="home-content">
           <h1>Hi, I'm <br /> <span>Ajay Meena</span></h1>
           <div className="text-animate">
-            <h3>Full-Stack Developer</h3>
+            <h3>MERN-STACK Developer</h3>
           </div>
           <p>Full Stack Developer skilled in Java, React, Node.js, MySQL & modern web technologies. I turn ideas into functional digital products.</p>
           <div className="btn-box">
@@ -22,10 +22,10 @@ export default function Home() {
             <a href="#">
               <FaFacebookF className='home-section-sci-icons' />
             </a>
-            <a href="#">
-              <FaTwitter className='home-section-sci-icons' />
+            <a href="https://github.com/ajaymeena9069" target='_blank'>
+              <FaGithub className='home-section-sci-icons' />
             </a>
-            <a href="#">
+            <a href="https://www.linkedin.com/in/ajay-meena-0719ab28a/" target='_blank'>
               <FaLinkedinIn className='home-section-sci-icons' />
             </a>
 

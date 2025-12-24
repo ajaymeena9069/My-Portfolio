@@ -7,13 +7,13 @@ export default function About() {
       <div className="container about-container">
 
         <div className="about-img">
-          <img src="Home_hero.png" alt="" />
+          <img src="public\1000011453.png" alt="" />
           <span className="circle-spin img-fluid"></span>
         </div>
 
         <div className="about-content">
           <h3>Full-Stack Devloper</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio a accusantium, consequatur mollitia ex, recusandae cupiditate quas molestias, dolor odit numquam ipsum qui. Assumenda fuga odio a culpa sit aperiam deserunt reiciendis temporibus accusantium esse? Facilis incidunt possimus ipsum dolor accusantium eos! Sit aspernatur ipsa molestiae quidem, architecto in dolor.</p>
+          <p>I’m a Full-Stack Developer skilled in Java, HTML, CSS, JavaScript, React, Node.js, and MongoDB. I enjoy building responsive, user-friendly web applications with clean code and modern design, combining frontend creativity with backend efficiency. Always eager to learn and adapt, I strive to deliver scalable and innovative digital solutions.</p>
 
           <div className="btn-box btns">
             <a href="" className="btn">Read More</a>
