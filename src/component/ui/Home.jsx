@@ -15,8 +15,8 @@ export default function Home() {
           </div>
           <p>Full Stack Developer skilled in Java, React, Node.js, MySQL & modern web technologies. I turn ideas into functional digital products.</p>
           <div className="btn-box">
-            <a href="" className="btn">Hire Me</a>
-            <a href="" className="btn">Let's Talk</a>
+            <a href="#contact" className="btn">Hire Me</a>
+            <a href="/resume.pdf" download={`ajay_meena_resume.pdf`} className="btn">Resume</a>
           </div>
           <div className="home-sci">
             <a href="#">

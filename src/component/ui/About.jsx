@@ -16,7 +16,7 @@ export default function About() {
           <p>I’m a Full-Stack Developer skilled in Java, HTML, CSS, JavaScript, React, Node.js, and MongoDB. I enjoy building responsive, user-friendly web applications with clean code and modern design, combining frontend creativity with backend efficiency. Always eager to learn and adapt, I strive to deliver scalable and innovative digital solutions.</p>
 
           <div className="btn-box btns">
-            <a href="" className="btn">Read More</a>
+            <a href="https://github.com/ajaymeena9069" className="btn">Read More</a>
           </div>
         </div>
       </div>
