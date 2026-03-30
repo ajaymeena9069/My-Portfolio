@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "MERN Stack Project",
+    "description": "Developed a MERN-based platform connecting blood donors with patients using role-based authentication.",
+    "tech": "React.js, Node.js, Express.js, MongoDB, JWT, Tailwind CSS, Recharts, Nodemailer, Redux Toolkit",
+    "image": "public/Blood_donation_app_img.png",
+    "previewLink": "https://blood-donation-emergency-app-01.vercel.app/",
+    "githubLink": "https://github.com/ajaymeena9069/blood-donation-emergency-app"
+  },
+  {
+    "id": 6,
+    "title": "MERN Stack Project",
+    "description": "Built a full-stack leave management system to automate leave requests and approvals.",
+    "tech": "React.js, Node.js, Express.js, MongoDB, JWT, Tailwind CSS, Recharts, Nodemailer, Redux Toolkit, Socket.IO",
+    "image": "/public/ChatGPT Image Mar 30, 2026, 10_41_10 AM.png",
+    "previewLink": "https://smart-leave-permission-system-cs6r.vercel.app/",
+    "githubLink": "https://github.com/ajaymeena9069/Smart-Leave-Permission-System"
+  },
+
+  {
+    "id": 2,
+    "title": "ReactJS Project",
+    "description": "Built with React and CSS, featuring API integration, React Router DOM, and a modern responsive design.",
+    "tech": "React, CSS3, API Integration, React Router DOM",
+    "image": "public/ChatGPT Image Sep 1, 2025, 09_04_16 PM.png",
+    "previewLink": "https://ajay-project-country-details.netlify.app/",
+    "githubLink": "https://github.com/ajaymeena9069/Project-Country-Details"
+  },
+  {
+    "id": 4,
+    "title": "Frontend Project",
+    "description": "Built a static website to revise my html and css skills.",
+    "tech": "HTML5, CSS3, JavaScript",
+    "image": "public/Illutration_static_website.png",
+    "previewLink": "https://ajay-frontend-project.netlify.app/",
+    "githubLink": "https://github.com/ajaymeena9069/illustrator-portfolio"
+  },
+  {
+    "id": 5,
+    "title": "Frontend Project",
+    "description": "Built a responsive personal portfolio using React.js with smooth animations and a contact form integrated via EmailJS.",
+    "tech": "React.js, CSS3, Framer Motion, EmailJS",
+    "image": "public/ChatGPT Image Mar 30, 2026, 10_54_01 AM.png",
+    "previewLink": "#",
+    "githubLink": "https://github.com/ajaymeena9069/My-Portfolio"
+  },
+  {
+    "id": 3,
+    "title": "GreenCart",
+    "description": "An e-commerce food store built with React, CSS, and libraries for a smooth and responsive shopping experience.",
+    "tech": "React, CSS3, JavaScript, Libraries",
+    "image": "public/Screenshot 2025-09-01 113345.png",
+    "previewLink": "#",
+    "githubLink": "https://github.com/ajaymeena9069/GreenCart"
+  }
+]

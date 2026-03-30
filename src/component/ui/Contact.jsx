@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
+import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 export default function Contact() {
 
@@ -32,14 +33,26 @@ export default function Contact() {
   // );
 
   return (
-    <section id="contact" className="contact">
+    <motion.section
+      id="contact"
+      className="contact"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="contact-container container">
         <h2 className="heading">
           Contact <span>Me!</span>
         </h2>
 
         {/* 🔴 ONLY CHANGE: onSubmit added */}
-        <form onSubmit={sendEmail}>
+        <motion.form
+          onSubmit={sendEmail}
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
           {/* Row 1 */}
           <div className="input-box">
             <div className="input-field">
@@ -105,8 +118,8 @@ export default function Contact() {
               Submit
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
-    </section>
+    </motion.section>
   );
 }

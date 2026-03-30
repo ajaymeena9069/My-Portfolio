@@ -1,13 +1,27 @@
 import React from 'react'
+import { motion } from 'framer-motion';
 
 export default function Skills() {
   return (
-    <section id='skills' className="skills">
+    <motion.section
+      id='skills'
+      className="skills"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.7 }}
+    >
       <div className="skills-section container">
 
         <h2 className='heading'>My <span>Skills</span></h2>
         <div className="skills-row">
-          <div className="skills-col">
+          <motion.div
+            className="skills-col"
+            initial={{ y: 40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+          >
             <div className="skills-box">
               <div className="skills-content">
                 <div className="progress">
@@ -31,9 +45,15 @@ export default function Skills() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="skills-col">
+          <motion.div
+            className="skills-col"
+            initial={{ y: 40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             <div className="skills-box">
               <div className="skills-content">
                 <div className="progress">
@@ -57,9 +77,9 @@ export default function Skills() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

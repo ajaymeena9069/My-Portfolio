@@ -1,15 +1,29 @@
 import React from 'react'
+import { motion } from 'framer-motion';
 import { FaArrowLeft, FaGithub } from 'react-icons/fa'
-import projectsData from '../api/projectsData.json'  // 👈 import json file
+import projectsData from '../json/projectsData.json'  // 👈 import json file
 
 export default function Projects() {
   return (
-    <section id='project' className="project">
+    <motion.section
+      id='project'
+      className="project"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7 }}
+    >
       <div className="project-container container">
         <h2 className="heading">My <span>Work's</span></h2>
         <div className="container-grid">
-          {projectsData.map((project) => (
-            <div className="container-item" key={project.id}>
+          {projectsData.map((project, index) => (
+            <motion.div
+              className="container-item"
+              key={project.id}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
               <div className="work-img">
                 <img className='img-fluid' src={project.image} alt={project.title} />
               </div>
@@ -30,10 +44,10 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

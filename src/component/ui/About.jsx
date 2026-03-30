@@ -1,25 +1,49 @@
 import React from 'react'
+import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section id='about' className="about">
+    <motion.section
+      id='about'
+      className="about"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.8 }}
+    >
       <h2 className='heading'>About <span>Me</span></h2>
       <div className="container about-container">
 
-        <div className="about-img">
-          <img src="public\1000011453.png" alt="" />
+        <motion.div
+          className="about-img"
+          initial={{ x: -40, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* FIX: correct image path */}
+          <img src="/IMG_20260102_142636.jpg" alt="" />
           <span className="circle-spin img-fluid"></span>
-        </div>
+        </motion.div>
 
-        <div className="about-content">
-          <h3>Full-Stack Devloper</h3>
-          <p>I’m a Full-Stack Developer skilled in Java, HTML, CSS, JavaScript, React, Node.js, and MongoDB. I enjoy building responsive, user-friendly web applications with clean code and modern design, combining frontend creativity with backend efficiency. Always eager to learn and adapt, I strive to deliver scalable and innovative digital solutions.</p>
+        <motion.div
+          className="about-content"
+          initial={{ x: 40, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h3>MERN-Stack Devloper</h3>
+          <p>Aspiring MERN Stack Developer with hands-on project experience in React, Node.js, Express, and
+            MongoDB. Seeking an opportunity to apply my skills, learn modern technologies, and contribute to
+            real world-web development projects.</p>
 
           <div className="btn-box btns">
             <a href="https://github.com/ajaymeena9069" className="btn">Read More</a>
           </div>
-        </div>
+        </motion.div> {/* FIX: closing motion.div properly */}
+
       </div>
-    </section>
+    </motion.section>
   )
 }

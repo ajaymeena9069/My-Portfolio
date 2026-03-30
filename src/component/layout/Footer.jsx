@@ -1,11 +1,17 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FaArrowUp, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className='footer'>
+    <motion.footer
+      className='footer'
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="footer-container container">
-        
+
         {/* Footer Text */}
         <div className="footer-text">
           <p>Copyright &copy; 2025 by Ajay Meena | All Rights Reserved.</p>
@@ -20,10 +26,10 @@ export default function Footer() {
 
         {/* Back to Top Button */}
         <div className="footer-iconTop">
-          <a href="#"><FaArrowUp className='footer-icon-up'/></a>
+          <a href="#"><FaArrowUp className='footer-icon-up' /></a>
         </div>
 
       </div>
-    </footer>
+    </motion.footer>
   )
 }
