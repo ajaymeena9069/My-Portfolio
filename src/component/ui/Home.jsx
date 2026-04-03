@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs, FaDatabase } from 'react-icons/fa';
+import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs } from 'react-icons/fa';
 import { SiMongodb, SiExpress } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
+        staggerChildren: 0.1,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.4, ease: "easeOut" }
     }
   };
 
@@ -34,7 +33,7 @@ export default function Home() {
     { icon: FaFacebookF, url: "#", label: "Facebook", color: "#1877f2" },
     { icon: FaGithub, url: "https://github.com/ajaymeena9069", label: "GitHub", color: "#333" },
     { icon: FaLinkedinIn, url: "https://www.linkedin.com/in/ajay-meena-0719ab28a/", label: "LinkedIn", color: "#0a66c2" },
-    { icon: FaTwitter, url: "https://twitter.com/yourusername", label: "Twitter", color: "#1da1f2" }
+    { icon: FaTwitter, url: "https://twitter.com/", label: "Twitter", color: "#1da1f2" }
   ];
 
   const techStack = [
@@ -50,7 +49,7 @@ export default function Home() {
       className="home"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="home-container">
         <div className='home-section'>
@@ -74,8 +73,7 @@ export default function Home() {
             </motion.div>
 
             <motion.p variants={itemVariants}>
-              Full Stack Developer skilled in Java, React, Node.js, MySQL & modern web technologies.
-              I turn ideas into functional digital products with clean code and beautiful design.
+              MERN Stack Developer with a strong foundation in modern web technologies. I build responsive web applications and learn by creating practical projects.
             </motion.p>
 
             <motion.div className="tech-stack" variants={itemVariants}>
@@ -111,7 +109,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="social-link"
-                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileHover={{ y: -3, scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   style={{ '--hover-color': color }}
                 >
@@ -126,14 +124,13 @@ export default function Home() {
             style={{ scale, opacity }}
           >
             <Tilt
-              tiltMaxAngleX={15}
-              tiltMaxAngleY={15}
-              glareEnable={true}
-              transitionSpeed={1000}
-              perspective={1000}
-              scale={1.02}
-              gyroscope={true}
-              glareColor="rgba(0, 171, 240, 0.4)"
+              tiltMaxAngleX={10}
+              tiltMaxAngleY={10}
+              glareEnable={false}
+              transitionSpeed={800}
+              perspective={800}
+              scale={1.01}
+              gyroscope={false}
               className="tilt-wrapper"
             >
               <div className="hero-image-wrapper">
@@ -143,6 +140,7 @@ export default function Home() {
                   className='hero-image'
                   src="/Home_hero.png"
                   alt="Ajay Meena - Full Stack Developer"
+                  loading="eager"
                 />
                 <div className="floating-cards">
                   <div className="card card-1">
@@ -163,12 +161,11 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           className="scroll-indicator"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1, duration: 0.5 }}
         >
           <div className="mouse">
             <div className="wheel"></div>

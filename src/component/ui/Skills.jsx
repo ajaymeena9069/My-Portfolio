@@ -26,18 +26,18 @@ export default function Skills() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.08,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.4, ease: "easeOut" }
     }
   };
 
@@ -48,15 +48,15 @@ export default function Skills() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="skills-container">
         <motion.div
           className="skills-header"
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
           <h2 className='heading'>My <span>Skills</span></h2>
           <p className="skills-subtitle">Technologies & Tools I work with</p>
@@ -84,7 +84,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02, y: -3 }}
+                  whileHover={{ y: -2 }}
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -102,7 +102,7 @@ export default function Skills() {
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.3 + (index * 0.1) }}
+                      transition={{ duration: 0.8, delay: 0.2 + (index * 0.05) }}
                       style={{ background: `linear-gradient(90deg, ${skill.color}, ${skill.color}cc)` }}
                     >
                       <div className="skill-glow"></div>
@@ -133,7 +133,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02, y: -3 }}
+                  whileHover={{ y: -2 }}
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -151,7 +151,7 @@ export default function Skills() {
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.3 + (index * 0.1) }}
+                      transition={{ duration: 0.8, delay: 0.2 + (index * 0.05) }}
                       style={{ background: `linear-gradient(90deg, ${skill.color}, ${skill.color}cc)` }}
                     >
                       <div className="skill-glow"></div>
@@ -166,10 +166,10 @@ export default function Skills() {
         {/* Additional Tools Section */}
         <motion.div
           className="tools-section"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
         >
           <h3 className="tools-title">Tools & Technologies</h3>
           <div className="tools-grid">
@@ -184,11 +184,11 @@ export default function Skills() {
               <motion.div
                 key={tool.name}
                 className="tool-card"
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.6 + (index * 0.05) }}
-                whileHover={{ y: -5, scale: 1.05 }}
+                transition={{ duration: 0.3, delay: 0.3 + (index * 0.03) }}
+                whileHover={{ y: -3, scale: 1.03 }}
               >
                 <div className="tool-icon" style={{ background: `${tool.color}20`, color: tool.color }}>
                   <span>{tool.icon}</span>

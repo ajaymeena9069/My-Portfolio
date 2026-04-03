@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaBars,
@@ -18,56 +18,156 @@ export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [toggle, setToggle] = useState(false);
+  const scrollTimeout = useRef(null);
+  const observerRef = useRef(null);
+  const headerRef = useRef(null);
+  const isScrollingRef = useRef(false);
+  const initialLoadRef = useRef(true);
+
+  // Get header height
+  const getHeaderHeight = useCallback(() => {
+    return headerRef.current ? headerRef.current.offsetHeight : 80;
+  }, []);
 
   // Sticky Header
   useEffect(() => {
-    const handleScroll = () => setIsSticky(window.scrollY > 100);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking && !isScrollingRef.current) {
+        requestAnimationFrame(() => {
+          setIsSticky(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ScrollSpy with activeSection update
+  // ScrollSpy - Fixed for mobile
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
 
+    if (sections.length === 0) return;
+
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+        if (isScrollingRef.current) return;
+
+        // Get all visible sections
+        const visibleSections = entries.filter(entry => entry.isIntersecting);
+
+        if (visibleSections.length > 0) {
+          // Find section with highest intersection ratio
+          let bestMatch = visibleSections[0];
+          let bestRatio = bestMatch.intersectionRatio;
+
+          visibleSections.forEach(section => {
+            if (section.intersectionRatio > bestRatio) {
+              bestRatio = section.intersectionRatio;
+              bestMatch = section;
+            }
+          });
+
+          if (bestMatch && bestMatch.target.id && bestMatch.target.id !== activeSection) {
+            setActiveSection(bestMatch.target.id);
           }
-        });
+        }
       },
       {
-        root: null,
-        rootMargin: "-100px 0px 0px 0px",
-        threshold: 0.5,
+        rootMargin: "-90px 0px -50px 0px",
+        threshold: [0.1, 0.25, 0.5],
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
+    sections.forEach((section) => {
+      if (section.id) observer.observe(section);
+    });
 
-  // Close mobile menu when clicking a link
-  const handleNavClick = (id) => {
+    observerRef.current = observer;
+
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, [activeSection]);
+
+  // Smooth scroll function
+  const scrollToSection = useCallback((id) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    isScrollingRef.current = true;
+
+    const headerHeight = getHeaderHeight();
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+
+    // Update active section immediately
     setActiveSection(id);
-    setToggle(false);
-  };
 
-  // Prevent body scroll when mobile menu is open
+    // Reset scrolling flag
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 1000);
+  }, [getHeaderHeight]);
+
+  // Handle navigation click
+  const handleNavClick = useCallback((id, e) => {
+    if (e) e.preventDefault();
+
+    if (toggle) {
+      setToggle(false);
+      setTimeout(() => {
+        scrollToSection(id);
+      }, 200);
+    } else {
+      scrollToSection(id);
+    }
+  }, [toggle, scrollToSection]);
+
+  // Handle body scroll lock for mobile menu
   useEffect(() => {
     if (toggle) {
-      document.body.style.overflow = "hidden";
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
     }
+
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
     };
   }, [toggle]);
 
-  const toggleFunc = () => setToggle(!toggle);
+  const toggleFunc = useCallback(() => {
+    setToggle(prev => !prev);
+  }, []);
 
   const navItems = [
     { id: "home", label: "Home", icon: FaHome },
@@ -78,29 +178,76 @@ export const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: FaGithub, url: "https://github.com/yourusername", label: "GitHub" },
-    { icon: FaTwitter, url: "https://twitter.com/yourusername", label: "Twitter" },
-    { icon: FaLinkedin, url: "https://linkedin.com/in/yourusername", label: "LinkedIn" },
+    { icon: FaGithub, url: "https://github.com/ajaymeena9069", label: "GitHub" },
+    { icon: FaTwitter, url: "https://twitter.com/", label: "Twitter" },
+    { icon: FaLinkedin, url: "https://linkedin.com/in/ajay-meena-0719ab28a/", label: "LinkedIn" },
   ];
+
+  const headerVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        duration: 0.6
+      }
+    }
+  };
+
+  const mobileMenuVariants = {
+    hidden: { x: "-100%" },
+    visible: {
+      x: 0,
+      transition: {
+        type: "tween",
+        duration: 0.35,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    },
+    exit: {
+      x: "-100%",
+      transition: {
+        type: "tween",
+        duration: 0.3,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    }
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.25 }
+    },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.2 }
+    }
+  };
 
   return (
     <>
       <motion.header
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        ref={headerRef}
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
         className={`header-img container-fluid ${isSticky ? "sticky" : ""}`}
       >
         <div className="header flex container">
           <Tilt
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            glareEnable={true}
-            transitionSpeed={1000}
-            perspective={1000}
-            scale={1.05}
-            gyroscope={true}
-            glareColor="transparent"
+            tiltMaxAngleX={10}
+            tiltMaxAngleY={10}
+            glareEnable={false}
+            transitionSpeed={600}
+            perspective={800}
+            scale={1.02}
+            gyroscope={false}
+            className="nav-logo-wrapper"
           >
             <div className="nav-logo">
               <h1>
@@ -109,7 +256,6 @@ export const Header = () => {
             </div>
           </Tilt>
 
-          {/* Desktop Navigation */}
           <nav className="nav-bar desktop-nav">
             <ul className="flex nav-list">
               {navItems.map(({ id, label }) => (
@@ -117,14 +263,7 @@ export const Header = () => {
                   <a
                     href={`#${id}`}
                     className={`nav-link ${activeSection === id ? "active" : ""}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById(id)?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                      setActiveSection(id);
-                    }}
+                    onClick={(e) => handleNavClick(id, e)}
                   >
                     {label}
                   </a>
@@ -133,39 +272,41 @@ export const Header = () => {
             </ul>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button className="mob-nav-btn" onClick={toggleFunc} aria-label="Toggle menu">
+          <motion.button
+            className="mob-nav-btn"
+            onClick={toggleFunc}
+            aria-label="Toggle menu"
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.1 }}
+          >
             {toggle ? (
               <IoMdClose className="mob-nav-icon" />
             ) : (
               <FaBars className="mob-nav-icon" />
             )}
-          </button>
+          </motion.button>
         </div>
       </motion.header>
 
-      {/* Mobile Navigation - LEFT SIDE */}
-      <AnimatePresence>
+      {/* Mobile Navigation */}
+      <AnimatePresence mode="wait">
         {toggle && (
           <>
-            {/* Backdrop */}
             <motion.div
               className="mobile-menu-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               onClick={toggleFunc}
             />
-
-            {/* Menu Panel - Left Side */}
             <motion.div
               className="mobile-menu-panel"
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              {/* Profile Section */}
               <div className="mobile-profile">
                 <div className="profile-image">
                   <div className="profile-circle">
@@ -177,26 +318,13 @@ export const Header = () => {
                 <div className="profile-divider"></div>
               </div>
 
-              {/* Navigation Links */}
               <ul className="mobile-nav-list">
-                {navItems.map(({ id, label, icon: Icon }, index) => (
-                  <motion.li
-                    key={id}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.08 }}
-                  >
+                {navItems.map(({ id, label, icon: Icon }) => (
+                  <li key={id}>
                     <a
                       href={`#${id}`}
                       className={`mobile-nav-link ${activeSection === id ? "active" : ""}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById(id)?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                        handleNavClick(id);
-                      }}
+                      onClick={(e) => handleNavClick(id, e)}
                     >
                       <div className="nav-icon-wrapper">
                         <Icon className="nav-icon" />
@@ -204,11 +332,10 @@ export const Header = () => {
                       <span className="nav-label">{label}</span>
                       <span className="nav-indicator"></span>
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
 
-              {/* Footer Section */}
               <div className="mobile-menu-footer">
                 <div className="social-links">
                   {socialLinks.map(({ icon: Icon, url, label }) => (
@@ -224,7 +351,11 @@ export const Header = () => {
                     </a>
                   ))}
                 </div>
-                <a href="#contact" className="mobile-contact-btn" onClick={() => handleNavClick("contact")}>
+                <a
+                  href="#contact"
+                  className="mobile-contact-btn"
+                  onClick={(e) => handleNavClick("contact", e)}
+                >
                   Let's Connect
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>

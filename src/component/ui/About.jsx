@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaArrowRight } from 'react-icons/fa';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { MdOutlineCode } from 'react-icons/md';
 import { FiAward } from 'react-icons/fi';
@@ -12,82 +12,128 @@ export default function About() {
     { icon: FiAward, label: "Certificates", value: "3+", color: "#ffd700" }
   ];
 
+  const scrollToProjects = useCallback(() => {
+    const projectsSection = document.getElementById('project');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
+  // Reduced animation delays to prevent layout shift
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 15, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
+
   return (
     <motion.section
       id='about'
       className="about"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="about-container">
         <motion.div
           className="about-header"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
           <h2 className='heading'>About <span>Me</span></h2>
           <div className="heading-line"></div>
         </motion.div>
 
         <div className="about-grid">
-          {/* Image Section */}
+          {/* Image Section - Reduced animation complexity */}
           <motion.div
             className="about-image-wrapper"
-            initial={{ x: -50, opacity: 0, scale: 0.95 }}
-            whileInView={{ x: 0, opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, type: "spring" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 20 }}
           >
-            <div className="image-card">
-              <div className="image-bg"></div>
-              <img
-                src="/IMG_20260102_142636.jpg"
-                alt="Ajay Meena"
-                className="about-image"
-              />
-              <div className="image-overlay">
-                <div className="overlay-icons">
-                  <FaGithub />
-                  <FaLinkedin />
-                  <FaTwitter />
+            <div className="image-container">
+              <div className="animated-border"></div>
+              <div className="rotating-ring"></div>
+              <div className="image-circle">
+                <img
+                  src= "IMG_20260403_164121.png"
+                  alt="Ajay Meena"
+                  className="about-image"
+                  loading="eager"
+                />
+                <div className="image-overlay-circle">
+                  <div className="overlay-icons-circle">
+                    <a href="https://github.com/ajaymeena9069" target="_blank" rel="noopener noreferrer">
+                      <FaGithub />
+                    </a>
+                    <a href="https://www.linkedin.com/in/ajay-meena-0719ab28a/" target="_blank" rel="noopener noreferrer">
+                      <FaLinkedin />
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                      <FaTwitter />
+                    </a>
+                  </div>
                 </div>
               </div>
+              {/* Floating elements - Simplified */}
+              <motion.div
+                className="floating-dot dot-1"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <MdOutlineCode />
+              </motion.div>
+              <motion.div
+                className="floating-dot dot-2"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <FaGithub />
+              </motion.div>
             </div>
           </motion.div>
 
           {/* Content Section */}
           <motion.div
             className="about-content"
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="role-badge">
+            <motion.div variants={itemVariants} className="role-badge">
               <span>MERN-Stack Developer</span>
-            </div>
+            </motion.div>
 
-            <p className="about-text">
-              Aspiring MERN Stack Developer with hands-on project experience in React, Node.js, Express, and
-              MongoDB. Seeking an opportunity to apply my skills, learn modern technologies, and contribute to
-              real-world web development projects.
-            </p>
+            <motion.p variants={itemVariants} className="about-text">
+              MERN Stack Developer with hands-on project experience in React, Node.js, Express, and MongoDB. I build responsive web applications and continuously improve my skills by working on real-world projects and modern web technologies.
+            </motion.p>
 
-            {/* Highlights Section */}
-            <div className="highlights-grid">
+            <motion.div variants={itemVariants} className="highlights-grid">
               {highlights.map(({ icon: Icon, label, value, color }, index) => (
-                <motion.div
+                <div
                   key={label}
                   className="highlight-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
-                  whileHover={{ y: -3 }}
+                  style={{ transitionDelay: `${index * 50}ms` }}
                 >
                   <div className="highlight-icon" style={{ background: `${color}15`, color }}>
                     <Icon />
@@ -96,19 +142,16 @@ export default function About() {
                     <h4 className="highlight-value">{value}</h4>
                     <p className="highlight-label">{label}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="btn-box">
-              <a href="https://github.com/ajaymeena9069" className="btn" target="_blank" rel="noopener noreferrer">
+            <motion.div variants={itemVariants} className="btn-box">
+              <button onClick={scrollToProjects} className="btn">
                 View My Work
-                <svg className="btn-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
+                <FaArrowRight className="btn-arrow" />
+              </button>
+            </motion.div>
           </motion.div>
         </div>
       </div>

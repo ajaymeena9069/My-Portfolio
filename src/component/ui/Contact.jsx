@@ -1,13 +1,16 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import emailjs from "emailjs-com";
 import { FaPaperPlane, FaCheck, FaSpinner, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { AnimatePresence } from "framer-motion";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(null); // 'success', 'error', null
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -26,13 +29,13 @@ export default function Contact() {
           setFormStatus('success');
           setIsSubmitting(false);
           e.target.reset();
-          setTimeout(() => setFormStatus(null), 3000);
+          setTimeout(() => setFormStatus(null), 4000);
         },
         (error) => {
           console.error(error);
           setFormStatus('error');
           setIsSubmitting(false);
-          setTimeout(() => setFormStatus(null), 3000);
+          setTimeout(() => setFormStatus(null), 4000);
         }
       );
   };
@@ -43,22 +46,43 @@ export default function Contact() {
     { icon: MdLocationOn, text: "Indore, Madhya Pradesh, India", link: "#", color: "#ff6b6b" }
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
+  const infoVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.1 } }
+  };
+
   return (
     <motion.section
       id="contact"
       className="contact"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8 }}
+      ref={sectionRef}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+      style={{ overflowX: "hidden" }} // prevent any horizontal overflow
     >
       <div className="contact-container">
         <motion.div
           className="contact-header"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={headerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
         >
           <h2 className="heading">
             Contact <span>Me!</span>
@@ -71,10 +95,9 @@ export default function Contact() {
           {/* Contact Info Side */}
           <motion.div
             className="contact-info"
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={infoVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
             <h3 className="info-title">Get In Touch</h3>
             <p className="info-description">
@@ -88,11 +111,12 @@ export default function Contact() {
                   key={index}
                   href={link}
                   className="info-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   whileHover={{ x: 5, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ willChange: "transform" }}
                 >
                   <div className="info-icon" style={{ background: `${color}15`, color }}>
                     <Icon />
@@ -110,15 +134,33 @@ export default function Contact() {
             <div className="social-connect">
               <h4>Connect with me</h4>
               <div className="social-icons">
-                <a href="https://github.com/ajaymeena9069" target="_blank" rel="noopener noreferrer">
+                <motion.a
+                  href="https://github.com/ajaymeena9069"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <FaGithub />
-                </a>
-                <a href="https://linkedin.com/in/ajay-meena-0719ab28a" target="_blank" rel="noopener noreferrer">
+                </motion.a>
+                <motion.a
+                  href="https://linkedin.com/in/ajay-meena-0719ab28a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <FaLinkedinIn />
-                </a>
-                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+                </motion.a>
+                <motion.a
+                  href="https://twitter.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <FaTwitter />
-                </a>
+                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -127,10 +169,9 @@ export default function Contact() {
           <motion.form
             onSubmit={sendEmail}
             className="contact-form"
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={formVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
             <div className="form-group">
               <div className="input-row">
@@ -196,10 +237,13 @@ export default function Contact() {
             </div>
 
             <div className="form-footer">
-              <button
+              <motion.button
                 type="submit"
                 className="submit-btn"
                 disabled={isSubmitting}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 {isSubmitting ? (
                   <>
@@ -217,19 +261,33 @@ export default function Contact() {
                     Send Message
                   </>
                 )}
-              </button>
+              </motion.button>
 
-              {formStatus === 'success' && (
-                <div className="success-message">
-                  Message sent successfully! I'll get back to you soon.
-                </div>
-              )}
+              <AnimatePresence mode="wait">
+                {formStatus === 'success' && (
+                  <motion.div
+                    className="success-message"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Message sent successfully! I'll get back to you soon.
+                  </motion.div>
+                )}
 
-              {formStatus === 'error' && (
-                <div className="error-message">
-                  Failed to send message. Please try again.
-                </div>
-              )}
+                {formStatus === 'error' && (
+                  <motion.div
+                    className="error-message"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Failed to send message. Please try again.
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.form>
         </div>

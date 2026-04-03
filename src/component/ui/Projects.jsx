@@ -1,48 +1,72 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import { FaGithub, FaCode } from 'react-icons/fa';
 import { MdPreview } from 'react-icons/md';
 import projectsData from '../json/projectsData.json';
 
 export default function Projects() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
+
   return (
     <motion.section
       id='project'
       className="project"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="project-container">
         <motion.div
           className="project-header"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
           <h2 className="heading">My <span>Work's</span></h2>
           <p className="project-subtitle">Some of my recent projects and work</p>
           <div className="heading-line"></div>
         </motion.div>
 
-        <div className="projects-grid">
+        <motion.div
+          className="projects-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {projectsData.map((project, index) => (
             <motion.div
               className="project-card"
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
             >
               <div className="project-image-wrapper">
                 <img
                   className="project-image"
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                 />
                 <div className="project-overlay">
                   <div className="tech-stack">
@@ -101,7 +125,7 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

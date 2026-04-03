@@ -13,7 +13,8 @@ export default function Footer() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = (e) => {
+    e.preventDefault(); // prevent hash jump
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -29,27 +30,39 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="footer">
+    <footer className="footer" style={{ overflowX: "hidden" }}>
       <div className="footer-container container">
         {/* Footer Text */}
         <div className="footer-text">
-          <p>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             Made with <FaHeart className="footer-heart" /> by Ajay Meena
-          </p>
-          <p className="copyright">
+          </motion.p>
+          <motion.p
+            className="copyright"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             &copy; {currentYear} | All Rights Reserved
-          </p>
+          </motion.p>
         </div>
 
         {/* Social Links */}
         <div className="footer-socials">
-          {socialLinks.map(({ icon: Icon, url, label }) => (
+          {socialLinks.map(({ icon: Icon, url, label }, index) => (
             <motion.a
               key={label}
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -59,14 +72,14 @@ export default function Footer() {
         </div>
 
         {/* Back to Top Button */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {showScrollTop && (
             <motion.div
               className="footer-iconTop"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <a onClick={scrollToTop} href="#" aria-label="Back to top">
                 <FaArrowUp className="footer-icon-up" />
