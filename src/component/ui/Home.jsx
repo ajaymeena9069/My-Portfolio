@@ -53,6 +53,7 @@ export default function Home() {
 
     // Possible file paths
     const possiblePaths = [
+      '/ajay_meena_resume.pdf',
       '/resume.pdf',
       '/Resume.pdf',
       '/RESUME.pdf',
@@ -93,7 +94,7 @@ export default function Home() {
 
     // If all fail, open in new tab
     if (!downloaded) {
-      window.open('/resume.pdf', '_blank');
+      window.open('/ajay_meena_resume.pdf', '_blank');
     }
 
     // Hide loading after download starts
