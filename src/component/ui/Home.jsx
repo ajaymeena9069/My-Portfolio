@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs } from 'react-icons/fa';
+import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs, FaSpinner } from 'react-icons/fa';
 import { SiMongodb, SiExpress } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
 
@@ -8,6 +8,9 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
+
+  // Loading state for download
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -42,6 +45,62 @@ export default function Home() {
     { icon: SiMongodb, name: "MongoDB", color: "#4ea94b" },
     { icon: SiExpress, name: "Express", color: "#ffffff" }
   ];
+
+  // Handle download with loading state
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    setIsDownloading(true);
+
+    // Possible file paths
+    const possiblePaths = [
+      '/resume.pdf',
+      '/Resume.pdf',
+      '/RESUME.pdf',
+      '/Ajay_Meena_Resume.pdf',
+      '/ajay-meena-resume.pdf',
+      '/cv.pdf'
+    ];
+
+    const downloadFile = async (url) => {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const blob = await response.blob();
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'Ajay_Meena_Resume.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(link.href);
+          return true;
+        }
+        return false;
+      } catch {
+        return false;
+      }
+    };
+
+    // Try each path
+    let downloaded = false;
+    for (const path of possiblePaths) {
+      const success = await downloadFile(path);
+      if (success) {
+        downloaded = true;
+        break;
+      }
+    }
+
+    // If all fail, open in new tab
+    if (!downloaded) {
+      window.open('/resume.pdf', '_blank');
+    }
+
+    // Hide loading after download starts
+    setTimeout(() => {
+      setIsDownloading(false);
+    }, 1000);
+  };
 
   return (
     <motion.section
@@ -90,14 +149,24 @@ export default function Home() {
                 <FaPaperPlane className="btn-icon" />
                 Hire Me
               </a>
-              <a
-                href="/resume.pdf"
-                download="ajay_meena_resume.pdf"
+              <button
+                onClick={handleDownload}
                 className="btn btn-secondary"
+                disabled={isDownloading}
+                style={{ opacity: isDownloading ? 0.7 : 1, cursor: isDownloading ? 'wait' : 'pointer' }}
               >
-                <FaDownload className="btn-icon" />
-                Download CV
-              </a>
+                {isDownloading ? (
+                  <>
+                    <FaSpinner className="btn-icon spinner" />
+                    Preparing Resume...
+                  </>
+                ) : (
+                  <>
+                    <FaDownload className="btn-icon" />
+                    Download CV
+                  </>
+                )}
+              </button>
             </motion.div>
 
             <motion.div className="home-sci" variants={itemVariants}>
