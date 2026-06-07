@@ -137,22 +137,24 @@ a {
 .header {
   justify-content: space-between;
   align-items: center;
-  height: auto !important;
+  height: auto;
   width: 100%;
-  padding: 20px 40px !important;
-  margin: 0 auto !important;
-  max-width: 1400px !important;
+  padding: 14px 5%;
+  margin: 0 auto;
+  max-width: 1400px;
   transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative !important;
+  position: relative;
 }
 
 /* Logo Styles */
 .nav-logo {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .nav-logo h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: var(--text-color);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -174,6 +176,7 @@ a {
 .nav-logo h1:hover {
   transform: translateY(-2px);
 }
+
 
 /* Desktop Navigation */
 .desktop-nav {
@@ -283,8 +286,8 @@ a {
 /* Large Desktop */
 @media (min-width: 1920px) {
   .header {
-    padding: 25px 60px;
-    max-width: 1600px;
+    padding: 18px 5%;
+    max-width: 1400px;
   }
 
   .nav-list {
@@ -292,18 +295,18 @@ a {
   }
 
   .nav-list a {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
   }
 
   .nav-logo h1 {
-    font-size: 4rem;
+    font-size: 3.2rem;
   }
 }
 
 /* Medium Desktop */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .header {
-    padding: 22px 50px;
+    padding: 16px 5%;
     max-width: 1400px;
   }
 
@@ -312,14 +315,14 @@ a {
   }
 
   .nav-list a {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 }
 
 /* Small Desktop */
 @media (min-width: 1024px) and (max-width: 1366px) {
   .header {
-    padding: 18px 30px;
+    padding: 14px 5%;
   }
 
   .nav-list {
@@ -331,7 +334,7 @@ a {
   }
 
   .nav-logo h1 {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 }
 
@@ -341,11 +344,11 @@ a {
 }
 
 .header-img.sticky .header {
-  padding: 12px 40px;
+  padding: 12px 5%;
 }
 
 .header-img.sticky .nav-logo h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
 }
 
 .header-img.sticky .nav-list a {
@@ -1001,12 +1004,13 @@ section[id] {
   }
 
   40%,
-  85% {
+  70% {
     background-size: 100% 100%;
   }
 
+  90%,
   100% {
-    background-size: 100% 100%;
+    background-size: 0% 100%;
   }
 }
 
@@ -1019,20 +1023,15 @@ section[id] {
   }
 
   40%,
-  85% {
+  70% {
     width: 100%;
     opacity: 1;
   }
 
   90%,
-  95% {
-    width: 100%;
-    opacity: 0;
-  }
-
   100% {
-    width: 100%;
-    opacity: 0;
+    width: 0;
+    opacity: 1;
   }
 }
 
@@ -3501,6 +3500,7 @@ section[id] {
 }
 
 /* Reduced Motion Preference - Accessibility */
+/* 
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -3514,4 +3514,5 @@ section[id] {
   .footer-heart {
     animation: none;
   }
-}
+} 
+*/

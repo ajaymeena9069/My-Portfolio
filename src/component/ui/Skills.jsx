@@ -2,23 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   FaHtml5, FaCss3Alt, FaJs, FaJava,
-  FaReact, FaNodeJs, FaDatabase, FaServer
+  FaReact, FaNodeJs, FaDatabase, FaServer, FaAws
 } from 'react-icons/fa';
-import { SiMongodb, SiMysql } from 'react-icons/si';
+import { SiMongodb, SiMysql, SiNextdotjs } from 'react-icons/si';
 
 export default function Skills() {
   const frontendSkills = [
     { name: "HTML", level: 90, icon: FaHtml5, color: "#e34c26", description: "Semantic HTML5, SEO, Accessibility" },
     { name: "CSS", level: 85, icon: FaCss3Alt, color: "#264de4", description: "Flexbox, Grid, Animations, Responsive" },
     { name: "JavaScript", level: 75, icon: FaJs, color: "#f7df1e", description: "ES6+, Async/Await, DOM Manipulation" },
-    { name: "React", level: 88, icon: FaReact, color: "#61dafb", description: "Hooks, Redux, Context API, Router" }
+    { name: "React", level: 88, icon: FaReact, color: "#61dafb", description: "Hooks, Redux, Context API, Router" },
+    { name: "Next.js", level: 75, icon: SiNextdotjs, color: "#ffffff", description: "SSR, SSG, File-based Routing" }
   ];
 
   const backendSkills = [
     { name: "Java", level: 85, icon: FaJava, color: "#007396", description: "OOP, Collections, Multithreading" },
     { name: "Node.js", level: 82, icon: FaNodeJs, color: "#68a063", description: "Express.js, REST APIs, JWT" },
     { name: "MongoDB", level: 78, icon: SiMongodb, color: "#4ea94b", description: "Aggregation, Indexing, Mongoose" },
-    { name: "MySQL", level: 80, icon: SiMysql, color: "#4479a1", description: "Complex Queries, Optimization, Joins" }
+    { name: "MySQL", level: 80, icon: SiMysql, color: "#4479a1", description: "Complex Queries, Optimization, Joins" },
+    { name: "AWS", level: 70, icon: FaAws, color: "#ff9900", description: "EC2, S3, Deployment basics" }
   ];
 
   const containerVariants = {

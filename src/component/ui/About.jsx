@@ -75,7 +75,7 @@ export default function About() {
               <div className="rotating-ring"></div>
               <div className="image-circle">
                 <img
-                  src= "IMG_20260403_164121.png"
+                  src="IMG_20260403_164121.png"
                   alt="Ajay Meena"
                   className="about-image"
                   loading="eager"
