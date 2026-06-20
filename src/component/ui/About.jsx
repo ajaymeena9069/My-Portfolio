@@ -32,11 +32,12 @@ export default function About() {
   };
 
   const itemVariants = {
-    hidden: { y: 15, opacity: 0 },
+    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
+      filter: 'blur(0px)',
+      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
     }
   };
 
@@ -52,10 +53,10 @@ export default function About() {
       <div className="about-container">
         <motion.div
           className="about-header"
-          initial={{ opacity: 0, y: -15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20, filter: { type: "tween", duration: 0.4 } }}
         >
           <h2 className='heading'>About <span>Me</span></h2>
           <div className="heading-line"></div>
@@ -65,10 +66,10 @@ export default function About() {
           {/* Image Section - Reduced animation complexity */}
           <motion.div
             className="about-image-wrapper"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 20 }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 150, damping: 20, filter: { type: "tween", duration: 0.6 } }}
           >
             <div className="image-container">
               <div className="animated-border"></div>
@@ -125,7 +126,7 @@ export default function About() {
             </motion.div>
 
             <motion.p variants={itemVariants} className="about-text">
-              MERN Stack Developer with hands-on project experience in React, Node.js, Express, and MongoDB. I build responsive web applications and continuously improve my skills by working on real-world projects and modern web technologies.
+              Dedicated Full Stack Developer with hands-on experience building and deploying over 5 real-world MERN stack projects. Skilled in modern web technologies including TypeScript, React.js, Next.js, and Node.js. Focused on writing clean code, optimizing databases with Redis, and handling end-to-end deployments using Docker, CI/CD pipelines, and AWS.
             </motion.p>
 
             <motion.div variants={itemVariants} className="highlights-grid">
@@ -147,7 +148,7 @@ export default function About() {
             </motion.div>
 
             <motion.div variants={itemVariants} className="btn-box">
-              <button onClick={scrollToProjects} className="btn">
+              <button onClick={scrollToProjects} className="btn btn-primary">
                 View My Work
                 <FaArrowRight className="btn-arrow" />
               </button>

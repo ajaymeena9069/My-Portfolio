@@ -4,7 +4,7 @@ import {
   FaHtml5, FaCss3Alt, FaJs, FaJava,
   FaReact, FaNodeJs, FaDatabase, FaServer, FaAws
 } from 'react-icons/fa';
-import { SiMongodb, SiMysql, SiNextdotjs } from 'react-icons/si';
+import { SiMongodb, SiMysql, SiNextdotjs, SiRedis, SiTailwindcss } from 'react-icons/si';
 
 export default function Skills() {
   const frontendSkills = [
@@ -12,7 +12,8 @@ export default function Skills() {
     { name: "CSS", level: 85, icon: FaCss3Alt, color: "#264de4", description: "Flexbox, Grid, Animations, Responsive" },
     { name: "JavaScript", level: 75, icon: FaJs, color: "#f7df1e", description: "ES6+, Async/Await, DOM Manipulation" },
     { name: "React", level: 88, icon: FaReact, color: "#61dafb", description: "Hooks, Redux, Context API, Router" },
-    { name: "Next.js", level: 75, icon: SiNextdotjs, color: "#ffffff", description: "SSR, SSG, File-based Routing" }
+    { name: "Next.js", level: 75, icon: SiNextdotjs, color: "#ffffff", description: "SSR, SSG, File-based Routing" },
+    { name: "Tailwind CSS", level: 85, icon: SiTailwindcss, color: "#38bdf8", description: "Utility-first, Responsive Design, Theming" }
   ];
 
   const backendSkills = [
@@ -20,6 +21,7 @@ export default function Skills() {
     { name: "Node.js", level: 82, icon: FaNodeJs, color: "#68a063", description: "Express.js, REST APIs, JWT" },
     { name: "MongoDB", level: 78, icon: SiMongodb, color: "#4ea94b", description: "Aggregation, Indexing, Mongoose" },
     { name: "MySQL", level: 80, icon: SiMysql, color: "#4479a1", description: "Complex Queries, Optimization, Joins" },
+    { name: "Redis", level: 70, icon: SiRedis, color: "#d82c20", description: "Caching, Message Broker, Pub/Sub" },
     { name: "AWS", level: 70, icon: FaAws, color: "#ff9900", description: "EC2, S3, Deployment basics" }
   ];
 
@@ -35,11 +37,12 @@ export default function Skills() {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
+      filter: 'blur(0px)',
+      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
     }
   };
 
@@ -55,10 +58,10 @@ export default function Skills() {
       <div className="skills-container">
         <motion.div
           className="skills-header"
-          initial={{ opacity: 0, y: -15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20, filter: { type: "tween", duration: 0.4 } }}
         >
           <h2 className='heading'>My <span>Skills</span></h2>
           <p className="skills-subtitle">Technologies & Tools I work with</p>
@@ -86,7 +89,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ y: -2 }}
+                  whileHover={{ y: -5, scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 15 } }}
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -135,7 +138,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ y: -2 }}
+                  whileHover={{ y: -5, scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 15 } }}
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -168,10 +171,10 @@ export default function Skills() {
         {/* Additional Tools Section */}
         <motion.div
           className="tools-section"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2, filter: { type: "tween", duration: 0.4, delay: 0.2 } }}
         >
           <h3 className="tools-title">Tools & Technologies</h3>
           <div className="tools-grid">
@@ -186,11 +189,11 @@ export default function Skills() {
               <motion.div
                 key={tool.name}
                 className="tool-card"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.8, filter: 'blur(5px)' }}
+                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.3 + (index * 0.03) }}
-                whileHover={{ y: -3, scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.3 + (index * 0.05), filter: { type: "tween", duration: 0.4, delay: 0.3 + (index * 0.05) } }}
+                whileHover={{ y: -5, scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 10 } }}
               >
                 <div className="tool-icon" style={{ background: `${tool.color}20`, color: tool.color }}>
                   <span>{tool.icon}</span>

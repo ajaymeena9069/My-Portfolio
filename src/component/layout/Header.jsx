@@ -9,7 +9,7 @@ import {
   FaEnvelope,
   FaGithub,
   FaTwitter,
-  FaLinkedin
+  FaLinkedin,
 } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import Tilt from "react-parallax-tilt";
@@ -62,21 +62,25 @@ export const Header = () => {
         if (isScrollingRef.current) return;
 
         // Get all visible sections
-        const visibleSections = entries.filter(entry => entry.isIntersecting);
+        const visibleSections = entries.filter((entry) => entry.isIntersecting);
 
         if (visibleSections.length > 0) {
           // Find section with highest intersection ratio
           let bestMatch = visibleSections[0];
           let bestRatio = bestMatch.intersectionRatio;
 
-          visibleSections.forEach(section => {
+          visibleSections.forEach((section) => {
             if (section.intersectionRatio > bestRatio) {
               bestRatio = section.intersectionRatio;
               bestMatch = section;
             }
           });
 
-          if (bestMatch && bestMatch.target.id && bestMatch.target.id !== activeSection) {
+          if (
+            bestMatch &&
+            bestMatch.target.id &&
+            bestMatch.target.id !== activeSection
+          ) {
             setActiveSection(bestMatch.target.id);
           }
         }
@@ -84,7 +88,7 @@ export const Header = () => {
       {
         rootMargin: "-90px 0px -50px 0px",
         threshold: [0.1, 0.25, 0.5],
-      }
+      },
     );
 
     sections.forEach((section) => {
@@ -100,73 +104,80 @@ export const Header = () => {
   }, [activeSection]);
 
   // Smooth scroll function
-  const scrollToSection = useCallback((id) => {
-    const element = document.getElementById(id);
-    if (!element) return;
+  const scrollToSection = useCallback(
+    (id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
 
-    isScrollingRef.current = true;
+      isScrollingRef.current = true;
 
-    const headerHeight = getHeaderHeight();
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+      const headerHeight = getHeaderHeight();
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerHeight;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth"
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
 
-    // Update active section immediately
-    setActiveSection(id);
+      // Update active section immediately
+      setActiveSection(id);
 
-    // Reset scrolling flag
-    setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 1000);
-  }, [getHeaderHeight]);
+      // Reset scrolling flag
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 1000);
+    },
+    [getHeaderHeight],
+  );
 
   // Handle navigation click
-  const handleNavClick = useCallback((id, e) => {
-    if (e) e.preventDefault();
+  const handleNavClick = useCallback(
+    (id, e) => {
+      if (e) e.preventDefault();
 
-    if (toggle) {
-      setToggle(false);
-      setTimeout(() => {
+      if (toggle) {
+        setToggle(false);
+        setTimeout(() => {
+          scrollToSection(id);
+        }, 200);
+      } else {
         scrollToSection(id);
-      }, 200);
-    } else {
-      scrollToSection(id);
-    }
-  }, [toggle, scrollToSection]);
+      }
+    },
+    [toggle, scrollToSection],
+  );
 
   // Handle body scroll lock for mobile menu
   useEffect(() => {
     if (toggle) {
       const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
     } else {
       const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
       }
     }
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
     };
   }, [toggle]);
 
   const toggleFunc = useCallback(() => {
-    setToggle(prev => !prev);
+    setToggle((prev) => !prev);
   }, []);
 
   const navItems = [
@@ -178,9 +189,17 @@ export const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: FaGithub, url: "https://github.com/ajaymeena9069", label: "GitHub" },
+    {
+      icon: FaGithub,
+      url: "https://github.com/ajaymeena9069",
+      label: "GitHub",
+    },
     { icon: FaTwitter, url: "https://twitter.com/", label: "Twitter" },
-    { icon: FaLinkedin, url: "https://linkedin.com/in/ajay-meena-0719ab28a/", label: "LinkedIn" },
+    {
+      icon: FaLinkedin,
+      url: "https://linkedin.com/in/ajay-meena-0719ab28a/",
+      label: "LinkedIn",
+    },
   ];
 
   const headerVariants = {
@@ -192,9 +211,9 @@ export const Header = () => {
         type: "spring",
         stiffness: 100,
         damping: 20,
-        duration: 0.6
-      }
-    }
+        duration: 0.6,
+      },
+    },
   };
 
   const mobileMenuVariants = {
@@ -204,29 +223,29 @@ export const Header = () => {
       transition: {
         type: "tween",
         duration: 0.35,
-        ease: [0.25, 0.1, 0.25, 1]
-      }
+        ease: [0.25, 0.1, 0.25, 1],
+      },
     },
     exit: {
       x: "-100%",
       transition: {
         type: "tween",
         duration: 0.3,
-        ease: [0.25, 0.1, 0.25, 1]
-      }
-    }
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
   };
 
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { duration: 0.25 }
+      transition: { duration: 0.25 },
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
 
   return (
@@ -299,7 +318,36 @@ export const Header = () => {
               animate="visible"
               exit="exit"
               onClick={toggleFunc}
-            />
+            >
+              <button
+                className="mobile-close-btn-outside"
+                onClick={(e) => {
+                  e.stopPropagation(); // prevent triggering overlay click twice
+                  toggleFunc();
+                }}
+                aria-label="Close menu"
+                style={{
+                  position: "absolute",
+                  top: "25px",
+                  right: "25px",
+                  background: "rgba(0,0,0,0.5)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  borderRadius: "50%",
+                  width: "45px",
+                  height: "45px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "1.8rem",
+                  cursor: "pointer",
+                  zIndex: 2000,
+                  backdropFilter: "blur(4px)",
+                }}
+              >
+                <IoMdClose />
+              </button>
+            </motion.div>
             <motion.div
               className="mobile-menu-panel"
               variants={mobileMenuVariants}
@@ -309,8 +357,26 @@ export const Header = () => {
             >
               <div className="mobile-profile">
                 <div className="profile-image">
-                  <div className="profile-circle">
-                    <span>A</span>
+                  <div
+                    className="profile-circle"
+                    style={{
+                      overflow: "hidden",
+                      transform: "none",
+                      backfaceVisibility: "visible",
+                      perspective: "none",
+                    }}
+                  >
+                    <img
+                      src="IMG_20260403_164121.png"
+                      alt="Ajay Meena"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transform: "none",
+                        filter: "none",
+                      }}
+                    />
                   </div>
                 </div>
                 <h3 className="profile-name">Ajay Meena</h3>
@@ -357,7 +423,17 @@ export const Header = () => {
                   onClick={(e) => handleNavClick("contact", e)}
                 >
                   Let's Connect
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>

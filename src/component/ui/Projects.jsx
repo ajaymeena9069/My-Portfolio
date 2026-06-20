@@ -1,8 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaCode } from 'react-icons/fa';
-import { MdPreview } from 'react-icons/md';
-import projectsData from '../json/projectsData.json';
+import React from "react";
+import { motion } from "framer-motion";
+import { FaGithub, FaCode } from "react-icons/fa";
+import { MdPreview } from "react-icons/md";
+import projectsData from "../json/projectsData.json";
 
 export default function Projects() {
   const containerVariants = {
@@ -11,23 +11,29 @@ export default function Projects() {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 25, opacity: 0, filter: "blur(8px)" },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
-    }
+      filter: "blur(0px)",
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        filter: { type: "tween", duration: 0.4 },
+      },
+    },
   };
 
   return (
     <motion.section
-      id='project'
+      id="project"
       className="project"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -37,13 +43,22 @@ export default function Projects() {
       <div className="project-container">
         <motion.div
           className="project-header"
-          initial={{ opacity: 0, y: -15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            filter: { type: "tween", duration: 0.4 },
+          }}
         >
-          <h2 className="heading">My <span>Work's</span></h2>
-          <p className="project-subtitle">Some of my recent projects and work</p>
+          <h2 className="heading">
+            My <span>Work's</span>
+          </h2>
+          <p className="project-subtitle">
+            Some of my recent projects and work
+          </p>
           <div className="heading-line"></div>
         </motion.div>
 
@@ -59,9 +74,17 @@ export default function Projects() {
               className="project-card"
               key={project.id}
               variants={itemVariants}
-              whileHover={{ y: -5 }}
+              whileHover={{
+                y: -8,
+                scale: 1.01,
+                transition: { type: "spring", stiffness: 300, damping: 15 },
+              }}
             >
-              <div className="project-image-wrapper">
+              <motion.div
+                className="project-image-wrapper"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "tween", duration: 0.3 }}
+              >
                 <img
                   className="project-image"
                   src={project.image}
@@ -70,15 +93,22 @@ export default function Projects() {
                 />
                 <div className="project-overlay">
                   <div className="tech-stack">
-                    {project.tech.split(', ').slice(0, 3).map((tech, i) => (
-                      <span key={i} className="tech-tag">{tech}</span>
-                    ))}
-                    {project.tech.split(', ').length > 3 && (
-                      <span className="tech-tag">+{project.tech.split(', ').length - 3}</span>
+                    {project.tech
+                      .split(", ")
+                      .slice(0, 3)
+                      .map((tech, i) => (
+                        <span key={i} className="tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                    {project.tech.split(", ").length > 3 && (
+                      <span className="tech-tag">
+                        +{project.tech.split(", ").length - 3}
+                      </span>
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               <div className="project-content">
                 <div className="project-title-section">
@@ -92,11 +122,18 @@ export default function Projects() {
                 <p className="project-description">{project.description}</p>
 
                 <div className="project-tech">
-                  {project.tech.split(', ').slice(0, 4).map((tech, i) => (
-                    <span key={i} className="tech-item">{tech}</span>
-                  ))}
-                  {project.tech.split(', ').length > 4 && (
-                    <span className="tech-item">+{project.tech.split(', ').length - 4}</span>
+                  {project.tech
+                    .split(", ")
+                    .slice(0, 4)
+                    .map((tech, i) => (
+                      <span key={i} className="tech-item">
+                        {tech}
+                      </span>
+                    ))}
+                  {project.tech.split(", ").length > 4 && (
+                    <span className="tech-item">
+                      +{project.tech.split(", ").length - 4}
+                    </span>
                   )}
                 </div>
 

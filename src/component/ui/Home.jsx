@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, animate } from 'framer-motion';
 import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs, FaSpinner } from 'react-icons/fa';
 import { SiMongodb, SiExpress } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
 
+// CSS-based Outline Fill Typing Animation
+const OutlineTypewriter = ({ text }) => {
+  return (
+    <h3 
+      className="outline-typewriter" 
+      data-text={text}
+    >
+      {text}
+    </h3>
+  );
+};
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
 
   // Loading state for download
   const [isDownloading, setIsDownloading] = useState(false);
@@ -24,11 +37,12 @@ export default function Home() {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
+      filter: 'blur(0px)',
+      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
     }
   };
 
@@ -128,8 +142,8 @@ export default function Home() {
               <span className="gradient-text">Ajay Meena</span>
             </motion.h1>
 
-            <motion.div className="text-animate" variants={itemVariants}>
-              <h3>MERN-STACK Developer</h3>
+            <motion.div variants={itemVariants}>
+              <OutlineTypewriter text="Full Stack Developer" />
             </motion.div>
 
             <motion.p variants={itemVariants}>
@@ -191,7 +205,9 @@ export default function Home() {
 
           <motion.div
             className="home-hero"
-            style={{ scale, opacity }}
+            style={{ scale, opacity, y: yParallax }}
+            animate={{ y: [0, -15, 0] }}
+            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
           >
             <Tilt
               tiltMaxAngleX={10}
@@ -208,7 +224,7 @@ export default function Home() {
                 <div className="hero-blob"></div>
                 <img
                   className='hero-image'
-                  src="/Home_hero.png"
+                  src="/premium_hero_transparent.png"
                   alt="Ajay Meena - Full Stack Developer"
                   loading="eager"
                 />
