@@ -1,21 +1,10 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaBars,
-  FaHome,
-  FaUserAlt,
-  FaCode,
-  FaProjectDiagram,
-  FaEnvelope,
-  FaGithub,
-  FaTwitter,
-  FaLinkedin,
-} from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
+import { Home, User, Code, Briefcase, Mail, Menu, X } from "lucide-react";
+import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import Tilt from "react-parallax-tilt";
 
 export const Header = () => {
-  const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [toggle, setToggle] = useState(false);
   const scrollTimeout = useRef(null);
@@ -27,24 +16,6 @@ export const Header = () => {
   // Get header height
   const getHeaderHeight = useCallback(() => {
     return headerRef.current ? headerRef.current.offsetHeight : 80;
-  }, []);
-
-  // Sticky Header
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking && !isScrollingRef.current) {
-        requestAnimationFrame(() => {
-          setIsSticky(window.scrollY > 50);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // ScrollSpy - Fixed for mobile
@@ -181,11 +152,11 @@ export const Header = () => {
   }, []);
 
   const navItems = [
-    { id: "home", label: "Home", icon: FaHome },
-    { id: "about", label: "About", icon: FaUserAlt },
-    { id: "skills", label: "Skills", icon: FaCode },
-    { id: "project", label: "Projects", icon: FaProjectDiagram },
-    { id: "contact", label: "Contact", icon: FaEnvelope },
+    { id: "home", label: "Home", icon: Home },
+    { id: "about", label: "About", icon: User },
+    { id: "skills", label: "Skills", icon: Code },
+    { id: "project", label: "Projects", icon: Briefcase },
+    { id: "contact", label: "Contact", icon: Mail },
   ];
 
   const socialLinks = [
@@ -255,7 +226,7 @@ export const Header = () => {
         initial="hidden"
         animate="visible"
         variants={headerVariants}
-        className={`header-img container-fluid ${isSticky ? "sticky" : ""}`}
+        className="header-img container-fluid"
       >
         <div className="header flex container">
           <Tilt
@@ -268,22 +239,25 @@ export const Header = () => {
             gyroscope={false}
             className="nav-logo-wrapper"
           >
-            <div className="nav-logo">
-              <h1>
-                AJAY <span>Meena</span>
+            <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <img src="/favicon.png" alt="Ajay Logo" className="logo-img" />
+              <h1 className="logo-text-modern">
+                Ajay
               </h1>
             </div>
           </Tilt>
 
           <nav className="nav-bar desktop-nav">
             <ul className="flex nav-list">
-              {navItems.map(({ id, label }) => (
+              {navItems.map(({ id, label, icon: Icon }) => (
                 <li className="nav-item" key={id}>
                   <a
                     href={`#${id}`}
                     className={`nav-link ${activeSection === id ? "active" : ""}`}
                     onClick={(e) => handleNavClick(id, e)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                   >
+                    <Icon size={18} />
                     {label}
                   </a>
                 </li>
@@ -299,9 +273,9 @@ export const Header = () => {
             transition={{ duration: 0.1 }}
           >
             {toggle ? (
-              <IoMdClose className="mob-nav-icon" />
+              <X className="mob-nav-icon" size={24} />
             ) : (
-              <FaBars className="mob-nav-icon" />
+              <Menu className="mob-nav-icon" size={24} />
             )}
           </motion.button>
         </div>
@@ -345,7 +319,7 @@ export const Header = () => {
                   backdropFilter: "blur(4px)",
                 }}
               >
-                <IoMdClose />
+                <X size={24} />
               </button>
             </motion.div>
             <motion.div
@@ -367,8 +341,9 @@ export const Header = () => {
                     }}
                   >
                     <img
-                      src="IMG_20260403_164121.png"
+                      src="IMG_20260403_164121.webp"
                       alt="Ajay Meena"
+                      loading="lazy"
                       style={{
                         width: "100%",
                         height: "100%",

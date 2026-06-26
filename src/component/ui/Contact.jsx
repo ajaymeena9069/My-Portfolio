@@ -48,23 +48,23 @@ export default function Contact() {
 
   // Animation variants
   const containerVariants = {
-    hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", stiffness: 80, damping: 20, filter: { type: "tween", duration: 0.4 } } }
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
   };
 
   const headerVariants = {
-    hidden: { opacity: 0, y: -20, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", stiffness: 100, damping: 20, filter: { type: "tween", duration: 0.4 } } }
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
   };
 
   const infoVariants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", stiffness: 100, damping: 20, delay: 0.1, filter: { type: "tween", duration: 0.4, delay: 0.1 } } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20, delay: 0.1 } }
   };
 
   const formVariants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", stiffness: 100, damping: 20, delay: 0.2, filter: { type: "tween", duration: 0.4, delay: 0.2 } } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20, delay: 0.2 } }
   };
 
   return (

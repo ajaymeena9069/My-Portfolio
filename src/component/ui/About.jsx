@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaArrowRight } from 'react-icons/fa';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { MdOutlineCode } from 'react-icons/md';
 import { FiAward } from 'react-icons/fi';
+import ImageLoader from "./ImageLoader";
 
 export default function About() {
   const highlights = [
@@ -32,12 +33,11 @@ export default function About() {
   };
 
   const itemVariants = {
-    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
+    hidden: { y: 25, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: 'blur(0px)',
-      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
+      transition: { type: "spring", stiffness: 120, damping: 20 }
     }
   };
 
@@ -53,10 +53,10 @@ export default function About() {
       <div className="about-container">
         <motion.div
           className="about-header"
-          initial={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 100, damping: 20, filter: { type: "tween", duration: 0.4 } }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <h2 className='heading'>About <span>Me</span></h2>
           <div className="heading-line"></div>
@@ -66,17 +66,17 @@ export default function About() {
           {/* Image Section - Reduced animation complexity */}
           <motion.div
             className="about-image-wrapper"
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, type: "spring", stiffness: 150, damping: 20, filter: { type: "tween", duration: 0.6 } }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 150, damping: 20 }}
           >
             <div className="image-container">
               <div className="animated-border"></div>
               <div className="rotating-ring"></div>
               <div className="image-circle">
-                <img
-                  src="IMG_20260403_164121.png"
+                <ImageLoader
+                  src="IMG_20260403_164121.webp"
                   alt="Ajay Meena"
                   className="about-image"
                   loading="eager"

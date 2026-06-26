@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useMotionValue, animate } from 'framer
 import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter, FaDownload, FaPaperPlane, FaCode, FaReact, FaNodeJs, FaSpinner } from 'react-icons/fa';
 import { SiMongodb, SiExpress } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
+import ImageLoader from "./ImageLoader";
 
 // CSS-based Outline Fill Typing Animation
 const OutlineTypewriter = ({ text }) => {
@@ -37,12 +38,11 @@ export default function Home() {
   };
 
   const itemVariants = {
-    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
+    hidden: { y: 25, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: 'blur(0px)',
-      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
+      transition: { type: "spring", stiffness: 120, damping: 20 }
     }
   };
 

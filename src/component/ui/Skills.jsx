@@ -37,12 +37,11 @@ export default function Skills() {
   };
 
   const itemVariants = {
-    hidden: { y: 25, opacity: 0, filter: 'blur(8px)' },
+    hidden: { y: 25, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: 'blur(0px)',
-      transition: { type: "spring", stiffness: 120, damping: 20, filter: { type: "tween", duration: 0.4 } }
+      transition: { type: "spring", stiffness: 120, damping: 20 }
     }
   };
 
@@ -58,10 +57,10 @@ export default function Skills() {
       <div className="skills-container">
         <motion.div
           className="skills-header"
-          initial={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 100, damping: 20, filter: { type: "tween", duration: 0.4 } }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <h2 className='heading'>My <span>Skills</span></h2>
           <p className="skills-subtitle">Technologies & Tools I work with</p>
@@ -89,7 +88,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ y: -5, scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -138,7 +137,7 @@ export default function Skills() {
                   key={skill.name}
                   className="skill-card"
                   variants={itemVariants}
-                  whileHover={{ y: -5, scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+
                 >
                   <div className="skill-card-header">
                     <div className="skill-icon" style={{ color: skill.color }}>
@@ -171,10 +170,10 @@ export default function Skills() {
         {/* Additional Tools Section */}
         <motion.div
           className="tools-section"
-          initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2, filter: { type: "tween", duration: 0.4, delay: 0.2 } }}
+          transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
         >
           <h3 className="tools-title">Tools & Technologies</h3>
           <div className="tools-grid">
@@ -189,11 +188,11 @@ export default function Skills() {
               <motion.div
                 key={tool.name}
                 className="tool-card"
-                initial={{ opacity: 0, scale: 0.8, filter: 'blur(5px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.3 + (index * 0.05), filter: { type: "tween", duration: 0.4, delay: 0.3 + (index * 0.05) } }}
-                whileHover={{ y: -5, scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 10 } }}
+                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.3 + (index * 0.05) }}
+
               >
                 <div className="tool-icon" style={{ background: `${tool.color}20`, color: tool.color }}>
                   <span>{tool.icon}</span>

@@ -8,9 +8,12 @@ import Projects from './component/ui/Projects';
 import Skills from './component/ui/Skills';
 import Contact from './component/ui/Contact';
 import Footer from './component/layout/Footer';
+import CursorGlow from './component/ui/CursorGlow';
+
 export default function App() {
   return (
     <>
+      <CursorGlow />
       <BackgroundAnimation />
       <Header />
       <Home />

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaGithub, FaCode } from "react-icons/fa";
 import { MdPreview } from "react-icons/md";
 import projectsData from "../json/projectsData.json";
+import ImageLoader from "./ImageLoader";
 
 export default function Projects() {
   const containerVariants = {
@@ -17,16 +18,14 @@ export default function Projects() {
   };
 
   const itemVariants = {
-    hidden: { y: 25, opacity: 0, filter: "blur(8px)" },
+    hidden: { y: 25, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: "blur(0px)",
       transition: {
         type: "spring",
         stiffness: 120,
         damping: 20,
-        filter: { type: "tween", duration: 0.4 },
       },
     },
   };
@@ -43,14 +42,13 @@ export default function Projects() {
       <div className="project-container">
         <motion.div
           className="project-header"
-          initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{
             type: "spring",
             stiffness: 100,
             damping: 20,
-            filter: { type: "tween", duration: 0.4 },
           }}
         >
           <h2 className="heading">
@@ -74,18 +72,11 @@ export default function Projects() {
               className="project-card"
               key={project.id}
               variants={itemVariants}
-              whileHover={{
-                y: -8,
-                scale: 1.01,
-                transition: { type: "spring", stiffness: 300, damping: 15 },
-              }}
             >
               <motion.div
                 className="project-image-wrapper"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "tween", duration: 0.3 }}
               >
-                <img
+                <ImageLoader
                   className="project-image"
                   src={project.image}
                   alt={project.title}

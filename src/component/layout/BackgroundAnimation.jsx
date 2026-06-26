@@ -30,7 +30,7 @@ export default function BackgroundAnimation() {
               value: "transparent",
             },
           },
-          fpsLimit: 120,
+          fpsLimit: 60,
           interactivity: {
             detectsOn: "window", // Important! Tracks mouse globally across the window
             events: {
@@ -76,7 +76,7 @@ export default function BackgroundAnimation() {
                 enable: true,
                 area: 800,
               },
-              value: 100, // Number of dots
+              value: 40, // Reduced from 100 for smooth scrolling performance
             },
             opacity: {
               value: 0.5,

@@ -4,7 +4,7 @@
     "title": "SkillSync AI",
     "description": "An AI-powered recruitment platform using Google Gemini AI for intelligent resume parsing and candidate-job matching.",
     "tech": "React.js, Node.js, Express.js, MongoDB, Redux Toolkit, Tailwind CSS, Gemini AI, Socket.IO",
-    "image": "/image_copy_framed.png",
+    "image": "/image_copy_framed.webp",
     "previewLink": "https://ajay-skillsync-ai.vercel.app/",
     "githubLink": "https://github.com/ajaymeena-dev/skillsync-ai.git"
   },
@@ -13,7 +13,7 @@
     "title": "Blood Donation Emergency App",
     "description": "Developed a MERN-based platform connecting blood donors with patients using role-based authentication.",
     "tech": "React.js, Node.js, Express.js, MongoDB, JWT, Tailwind CSS, Recharts, Nodemailer, Redux Toolkit",
-    "image": "/Blood_donation_app_img.png",
+    "image": "/Blood_donation_app_img.webp",
     "previewLink": "https://blood-donation-emergency-app-01.vercel.app/",
     "githubLink": "https://github.com/ajaymeena9069/blood-donation-emergency-app"
   },
@@ -22,7 +22,7 @@
     "title": "Smart Leave Permission System",
     "description": "Built a full-stack leave management system to automate leave requests and approvals.",
     "tech": "React.js, Node.js, Express.js, MongoDB, JWT, Tailwind CSS, Recharts, Nodemailer, Redux Toolkit, Socket.IO",
-    "image": "/ChatGPT Image Mar 30, 2026, 10_41_10 AM.png",
+    "image": "/ChatGPT Image Mar 30, 2026, 10_41_10 AM.webp",
     "previewLink": "https://smart-leave-permission-system-cs6r.vercel.app/",
     "githubLink": "https://github.com/ajaymeena9069/Smart-Leave-Permission-System"
   },
@@ -31,7 +31,7 @@
     "title": "Project Country Details",
     "description": "Built with React and CSS, featuring API integration, React Router DOM, and a modern responsive design.",
     "tech": "React, CSS3, API Integration, React Router DOM",
-    "image": "/ChatGPT Image Sep 1, 2025, 09_04_16 PM.png",
+    "image": "/ChatGPT Image Sep 1, 2025, 09_04_16 PM.webp",
     "previewLink": "https://ajay-project-country-details.netlify.app/",
     "githubLink": "https://github.com/ajaymeena9069/Project-Country-Details"
   },
@@ -40,7 +40,7 @@
     "title": "Illustrator Portfolio",
     "description": "Built a static website to revise my html and css skills.",
     "tech": "HTML5, CSS3, JavaScript",
-    "image": "/Illutration_static_website.png",
+    "image": "/Illutration_static_website.webp",
     "previewLink": "https://ajay-frontend-project.netlify.app/",
     "githubLink": "https://github.com/ajaymeena9069/illustrator-portfolio"
   },
@@ -49,7 +49,7 @@
     "title": "GreenCart",
     "description": "An e-commerce food store built with React, CSS, and libraries for a smooth and responsive shopping experience.",
     "tech": "React, CSS3, JavaScript, Libraries",
-    "image": "/Screenshot 2025-09-01 113345.png",
+    "image": "/Screenshot 2025-09-01 113345.webp",
     "previewLink": "#",
     "githubLink": "https://github.com/ajaymeena9069/GreenCart"
   }
