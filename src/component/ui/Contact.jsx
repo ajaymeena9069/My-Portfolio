@@ -75,9 +75,10 @@ export default function Contact() {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
-      style={{ overflowX: "hidden" }} // prevent any horizontal overflow
     >
       <div className="contact-container">
+        
+        {/* Standard Section Header */}
         <motion.div
           className="contact-header"
           variants={headerVariants}
@@ -85,7 +86,7 @@ export default function Contact() {
           animate={isInView ? "visible" : "hidden"}
         >
           <h2 className="heading">
-            Contact <span>Me!</span>
+            Contact <span>Me</span>
           </h2>
           <p className="contact-subtitle">Let's work together. Send me a message!</p>
           <div className="heading-line"></div>
@@ -116,9 +117,8 @@ export default function Contact() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   whileHover={{ x: 5, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  style={{ willChange: "transform" }}
                 >
-                  <div className="info-icon" style={{ background: `${color}15`, color }}>
+                  <div className="info-icon">
                     <Icon />
                   </div>
                   <div className="info-text">
@@ -134,33 +134,9 @@ export default function Contact() {
             <div className="social-connect">
               <h4>Connect with me</h4>
               <div className="social-icons">
-                <motion.a
-                  href="https://github.com/ajaymeena9069"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaGithub />
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/in/ajay-meena-0719ab28a"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaLinkedinIn />
-                </motion.a>
-                <motion.a
-                  href="https://twitter.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaTwitter />
-                </motion.a>
+                <a href="https://github.com/ajaymeena9069" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                <a href="https://linkedin.com/in/ajay-meena-0719ab28a" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></a>
+                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
               </div>
             </div>
           </motion.div>
@@ -175,65 +151,16 @@ export default function Contact() {
           >
             <div className="form-group">
               <div className="input-row">
-                <div className="input-wrapper">
-                  <input
-                    type="text"
-                    name="fullName"
-                    placeholder="Full Name"
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <span className="input-border"></span>
-                </div>
-
-                <div className="input-wrapper">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <span className="input-border"></span>
-                </div>
+                <input type="text" name="fullName" placeholder="Full Name" required disabled={isSubmitting} className="premium-input" />
+                <input type="email" name="email" placeholder="Email Address" required disabled={isSubmitting} className="premium-input" />
               </div>
 
               <div className="input-row">
-                <div className="input-wrapper">
-                  <input
-                    type="tel"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    pattern="[0-9]{10}"
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <span className="input-border"></span>
-                </div>
-
-                <div className="input-wrapper">
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Email Subject"
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <span className="input-border"></span>
-                </div>
+                <input type="tel" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required disabled={isSubmitting} className="premium-input" />
+                <input type="text" name="subject" placeholder="Email Subject" required disabled={isSubmitting} className="premium-input" />
               </div>
 
-              <div className="input-wrapper textarea-wrapper">
-                <textarea
-                  name="message"
-                  cols="30"
-                  rows="5"
-                  placeholder="Your Message"
-                  required
-                  disabled={isSubmitting}
-                ></textarea>
-                <span className="input-border"></span>
-              </div>
+              <textarea name="message" cols="30" rows="5" placeholder="Your Message" required disabled={isSubmitting} className="premium-input premium-textarea"></textarea>
             </div>
 
             <div className="form-footer">
@@ -243,48 +170,25 @@ export default function Contact() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 {isSubmitting ? (
-                  <>
-                    <FaSpinner className="spinner" />
-                    Sending...
-                  </>
+                  <><FaSpinner className="spinner" /> Sending...</>
                 ) : formStatus === 'success' ? (
-                  <>
-                    <FaCheck />
-                    Sent Successfully!
-                  </>
+                  <><FaCheck /> Sent Successfully!</>
                 ) : (
-                  <>
-                    <FaPaperPlane />
-                    Send Message
-                  </>
+                  <><FaPaperPlane /> Send Message</>
                 )}
               </motion.button>
 
               <AnimatePresence mode="wait">
                 {formStatus === 'success' && (
-                  <motion.div
-                    className="success-message"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Message sent successfully! I'll get back to you soon.
+                  <motion.div className="status-message success" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
+                    Message sent successfully!
                   </motion.div>
                 )}
-
                 {formStatus === 'error' && (
-                  <motion.div
-                    className="error-message"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Failed to send message. Please try again.
+                  <motion.div className="status-message error" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
+                    Failed to send message.
                   </motion.div>
                 )}
               </AnimatePresence>

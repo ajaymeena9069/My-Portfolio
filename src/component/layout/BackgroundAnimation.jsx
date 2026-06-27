@@ -8,7 +8,7 @@ export default function BackgroundAnimation() {
   }, []);
 
   return (
-    <div 
+    <div
       className="particles-container"
       style={{
         position: 'fixed',

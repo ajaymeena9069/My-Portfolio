@@ -39,15 +39,7 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            Made with <FaHeart className="footer-heart" /> by Ajay Meena
-          </motion.p>
-          <motion.p
-            className="copyright"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            &copy; {currentYear} | All Rights Reserved
+            &copy; {currentYear} Ajay Meena <span style={{ opacity: 0.5, margin: '0 8px' }}>|</span> Made with <FaHeart className="footer-heart" />
           </motion.p>
         </div>
 

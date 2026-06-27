@@ -120,30 +120,19 @@ export const Header = () => {
     [toggle, scrollToSection],
   );
 
-  // Handle body scroll lock for mobile menu
+  // Handle body scroll lock for mobile menu WITHOUT layout thrashing
   useEffect(() => {
     if (toggle) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none"; // Prevents mobile scrolling natively
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
       document.body.style.overflow = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
-      }
+      document.body.style.touchAction = "";
     }
 
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
     };
   }, [toggle]);
 
@@ -235,14 +224,13 @@ export const Header = () => {
             glareEnable={false}
             transitionSpeed={600}
             perspective={800}
-            scale={1.02}
             gyroscope={false}
             className="nav-logo-wrapper"
+            style={{ flexShrink: 0 }}
           >
-            <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <img src="/favicon.png" alt="Ajay Logo" className="logo-img" />
-              <h1 className="logo-text-modern">
-                Ajay
+            <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, whiteSpace: 'nowrap' }}>
+              <h1 className="logo-text-modern" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
+                <span style={{ color: 'var(--main-color)' }}>&lt;AJ</span>AY/&gt;
               </h1>
             </div>
           </Tilt>

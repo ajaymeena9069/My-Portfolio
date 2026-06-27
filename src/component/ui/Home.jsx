@@ -8,8 +8,8 @@ import ImageLoader from "./ImageLoader";
 // CSS-based Outline Fill Typing Animation
 const OutlineTypewriter = ({ text }) => {
   return (
-    <h3 
-      className="outline-typewriter" 
+    <h3
+      className="outline-typewriter"
       data-text={text}
     >
       {text}
@@ -147,7 +147,7 @@ export default function Home() {
             </motion.div>
 
             <motion.p variants={itemVariants}>
-              MERN Stack Developer with a strong foundation in modern web technologies. I build responsive web applications and learn by creating practical projects.
+              Software Engineer focused on building scalable, high-performance web applications. I bridge the gap between elegant frontend interfaces and robust backend architectures using the MERN stack.
             </motion.p>
 
             <motion.div className="tech-stack" variants={itemVariants}>
